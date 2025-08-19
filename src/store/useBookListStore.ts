@@ -1,8 +1,9 @@
 import { create } from "zustand";
+import type { receiveObjListProps } from "../types/books.type";
 
 interface BookListProps {
-  bookList: [];
-  setBookList: (value: []) => void;
+  bookList: receiveObjListProps[];
+  setBookList: (value: receiveObjListProps[]) => void;
 }
 
 const useBookListStore = create<BookListProps>((set) => ({

@@ -1,0 +1,16 @@
+.wish-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+
+  svg {
+    color: #fff;
+  }
+
+  &.active {
+    svg {
+      color: var(--red-color);
+    }
+  }
+}

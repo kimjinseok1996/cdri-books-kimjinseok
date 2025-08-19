@@ -1,0 +1,83 @@
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard-subset.css");
+
+:root {
+  --primary-color: #4880ee;
+  --gray-color: #dadada;
+  --light-gray-color: #f2f4f6;
+  --secondary-color: #6d7582;
+  --red-color: #e84118;
+  --subtitle-color : #8D94A0
+  --text-primary: #353C49;
+}
+
+* { 
+  font-family: "Pretendard";
+  font-display: swap;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  word-break: break-all;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #fff;
+  height: 100%;
+
+}
+
+.container{
+  max-width: 1240px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+body {
+  padding: 0 12px;
+}
+
+img {
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+button{
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+  background-color: transparent;
+
+  &:hover{
+    opacity: 0.9;
+  }
+}
+
+.main-title{
+  font-size: 24px;
+  font-weight: 500;
+  margin: 32px 0 32px 0;
+}

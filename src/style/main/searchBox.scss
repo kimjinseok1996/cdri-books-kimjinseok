@@ -1,0 +1,38 @@
+#search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  & > div {
+    background-color: var(--light-gray-color);
+    padding: 10px 14px;
+    border-radius: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    span {
+      svg {
+        font-size: 22px;
+        margin-right: 10px;
+        transform: translateY(1px);
+      }
+    }
+
+    input {
+      width: 100%;
+      background-color: transparent;
+    }
+  }
+
+  button {
+    width: 86px;
+    height: 32px;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    border-radius: 8px;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

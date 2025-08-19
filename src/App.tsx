@@ -4,14 +4,25 @@ import { useRoutes, BrowserRouter } from "react-router-dom";
 import Main from "./pages/Main";
 import WishList from "./pages/WishList";
 
+//layout
+import DefaultLayout from "./components/layout/DefaultLayout";
+
 const routes = [
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <DefaultLayout>
+        <Main />
+      </DefaultLayout>
+    ),
   },
   {
     path: "/wishlist",
-    element: <WishList />,
+    element: (
+      <DefaultLayout>
+        <WishList />
+      </DefaultLayout>
+    ),
   },
 ];
 
