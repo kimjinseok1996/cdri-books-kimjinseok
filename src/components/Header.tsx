@@ -11,7 +11,9 @@ function Header() {
 
   return (
     <header>
-      <h1>CERTICOS BOOKS</h1>
+      <h1>
+        <Link to={"/"}>CERTICOS BOOKS</Link>
+      </h1>
       <nav>
         <ul>
           {menuLinks.map((link) => (

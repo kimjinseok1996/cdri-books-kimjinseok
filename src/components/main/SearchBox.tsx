@@ -1,6 +1,6 @@
 import "../../style/main/searchBox.scss";
 import { TbSearch } from "react-icons/tb";
-import { useEffect, useRef } from "react";
+import { memo, useRef } from "react";
 
 interface SearchBoxProps {
   searchText: string;
@@ -9,30 +9,26 @@ interface SearchBoxProps {
 }
 
 function SearchBox({ searchText, setSearchText, refetch }: SearchBoxProps) {
-  const searchDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (searchDebounce.current) clearTimeout(searchDebounce.current);
-    searchDebounce.current = setTimeout(() => {
-      refetch();
-    }, 200);
-  }, [searchText]);
-
+  const inputRef = useRef(null);
   return (
     <div id="search-box">
       <div>
-        <span>
+        <button onClick={refetch}>
           <TbSearch />
-        </span>
+        </button>
         <input
+          ref={inputRef}
           type="text"
           placeholder="검색어를 입력하세요."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") refetch();
+          }}
         />
       </div>
-      <button>상세검색</button>
+      <button className="more-search">상세검색</button>
     </div>
   );
 }
-export default SearchBox;
+export default memo(SearchBox);

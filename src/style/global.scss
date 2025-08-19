@@ -8,6 +8,7 @@
   --red-color: #e84118;
   --subtitle-color : #8D94A0
   --text-primary: #353C49;
+  --mobile-size: 768px
 }
 
 * { 
@@ -34,10 +35,7 @@ body {
   margin: 0 auto;
   overflow-x: hidden;
   height: 100%;
-}
-
-body {
-  padding: 0 12px;
+  padding: 0 16px;
 }
 
 img {

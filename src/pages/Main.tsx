@@ -1,6 +1,6 @@
 import { useGetBooksData } from "../hooks/useGetBooksData";
 import SearchBox from "../components/main/SearchBox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
 import useBookListStore from "../store/useBookListStore";
@@ -10,28 +10,23 @@ import Pagination from "../components/Pagination";
 function Main() {
   const [searchText, setSearchText] = useState("");
   const bookList = useBookListStore((state) => state.bookList);
+  const metaData = useBookListStore((state) => state.metaData);
   const setBookList = useBookListStore((state) => state.setBookList);
   const [page, setPage] = useState(1);
 
   const sendObj = {
     query: searchText,
     sort: "",
-    page: page,
+    page,
     size: 10,
     target: "",
   };
 
-  const { data, refetch } = useGetBooksData(sendObj);
-  const metaData = data?.meta || [];
+  const { mutate } = useGetBooksData();
 
-  useEffect(() => {
-    const list = data?.documents || [];
-    setBookList(list);
-  }, [data]);
-
-  useEffect(() => {
-    refetch();
-  }, [page]);
+  const refetch = () => {
+    mutate(sendObj);
+  };
 
   return (
     <>

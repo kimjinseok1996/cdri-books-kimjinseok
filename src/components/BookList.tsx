@@ -1,5 +1,4 @@
 import "../style/main/bookList.scss";
-import "../style/main/wishButton.scss";
 import type { receiveObjListProps } from "../types/books.type";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { PiHeartFill, PiHeartBold } from "react-icons/pi";
@@ -17,8 +16,6 @@ const MoreButton = ({
   openHandler: (isbn: string, bool: boolean) => void;
   isbn: string;
 }) => {
-  console.log("type >", type);
-
   const isUp = type === "up";
   return (
     <button
@@ -91,11 +88,12 @@ const WishButton = ({ isWish, isbn }: { isWish: boolean; isbn: string }) => {
     if (isWish) {
       removeWishList(isbn);
     } else {
+      const found = bookList.find(
+        (item) => item.isbn === isbn
+      ) as receiveObjListProps;
       addWishList([
         {
-          ...(bookList.find(
-            (item) => item.isbn === isbn
-          ) as receiveObjListProps),
+          ...found,
           isWish: true,
         },
       ]);
@@ -137,13 +135,17 @@ const BookInfoBox = ({
         <MoreButton type="up" openHandler={openHandler} isbn={item.isbn} />
         <div className="price-wrap">
           <p>
-            <span>원가</span>
-            <s>{moneyComma(item.price)}</s> 원
+            <span className="price-title">원가</span>
+            <span className="price-number">
+              <s>{moneyComma(item.price)}</s> 원
+            </span>
           </p>
           {item.sale_price && (
             <p>
-              <span>할인가</span>
-              <b>{moneyComma(item.sale_price)}</b> 원
+              <span className="price-title">할인가</span>
+              <span className="price-number">
+                <b>{moneyComma(item.sale_price)}</b> 원
+              </span>
             </p>
           )}
           <BuyButton url={item.url} />
