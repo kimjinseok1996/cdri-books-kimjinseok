@@ -23,7 +23,11 @@ const TransitionPageMoveLayout = ({ children }: { children: ReactNode }) => {
     _transition,
   };
 
-  return <FramerMotion values={_values}>{children}</FramerMotion>;
+  return (
+    <div style={{ overflow: "hidden" }}>
+      <FramerMotion values={_values}>{children}</FramerMotion>
+    </div>
+  );
 };
 
 export default TransitionPageMoveLayout;

@@ -1,10 +1,12 @@
-import "../../style/main/bookList.scss";
-import "../../style/main/wishButton.scss";
-import type { receiveObjListProps } from "../../types/books.type";
+import "../style/main/bookList.scss";
+import "../style/main/wishButton.scss";
+import type { receiveObjListProps } from "../types/books.type";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { PiHeartFill, PiHeartBold } from "react-icons/pi";
-import { moneyComma } from "../../share/share";
-import { ImageWithSuspense } from "../ImageWithSuspense";
+import { moneyComma } from "../share/share";
+import { ImageWithSuspense } from "./ImageWithSuspense";
+import useWishListStore from "../store/useWishListStore";
+import useBookListStore from "../store/useBookListStore";
 
 const MoreButton = ({
   type = "up",
@@ -15,6 +17,8 @@ const MoreButton = ({
   openHandler: (isbn: string, bool: boolean) => void;
   isbn: string;
 }) => {
+  console.log("type >", type);
+
   const isUp = type === "up";
   return (
     <button
@@ -38,9 +42,11 @@ const BuyButton = ({ url }: { url: string }) => {
 const ThumbnailImage = ({
   thumbnail,
   isWish,
+  isbn,
 }: {
   thumbnail: string;
   isWish: boolean;
+  isbn: string;
 }) => {
   return (
     <div className="thumbnail-image">
@@ -53,7 +59,7 @@ const ThumbnailImage = ({
           </p>
         </div>
       )}
-      <WishButton isWish={isWish} />
+      <WishButton isWish={isWish} isbn={isbn} />
     </div>
   );
 };
@@ -67,9 +73,40 @@ const BookTitle = ({ title, author }: { title: string; author: string }) => {
   );
 };
 
-const WishButton = ({ isWish }: { isWish: boolean }) => {
+const WishButton = ({ isWish, isbn }: { isWish: boolean; isbn: string }) => {
+  const addWishList = useWishListStore((state) => state.addWishList);
+  const removeWishList = useWishListStore((state) => state.removeWishList);
+  const bookList = useBookListStore((state) => state.bookList);
+  const setBookList = useBookListStore((state) => state.setBookList);
+
+  const wishHandler = () => {
+    const newBookList = bookList.map((item) => {
+      if (item.isbn === isbn) {
+        return { ...item, isWish: !isWish };
+      }
+      return item;
+    });
+    setBookList(newBookList);
+
+    if (isWish) {
+      removeWishList(isbn);
+    } else {
+      addWishList([
+        {
+          ...(bookList.find(
+            (item) => item.isbn === isbn
+          ) as receiveObjListProps),
+          isWish: true,
+        },
+      ]);
+    }
+  };
+
   return (
-    <button className={`wish-btn ${isWish ? "active" : ""}`}>
+    <button
+      className={`wish-btn ${isWish ? "active" : ""}`}
+      onClick={wishHandler}
+    >
       {isWish ? <PiHeartFill /> : <PiHeartBold />}
     </button>
   );
@@ -85,7 +122,11 @@ const BookInfoBox = ({
   return (
     <div className="book-info-wrap">
       <div className="info-wrap">
-        <ThumbnailImage thumbnail={item.thumbnail} isWish={item.isWish} />
+        <ThumbnailImage
+          thumbnail={item.thumbnail}
+          isWish={item.isWish}
+          isbn={item.isbn}
+        />
         <div className="info-box">
           <BookTitle title={item.title} author={item.authors[0]} />
           <h6>책 소개</h6>
@@ -117,7 +158,7 @@ function BookList({
   setBookList,
 }: {
   bookList: receiveObjListProps[];
-  setBookList: (bookList: receiveObjListProps[]) => void;
+  setBookList?: (bookList: receiveObjListProps[]) => void;
 }) {
   const openHandler = (isbn: string, bool: boolean) => {
     const newBookList = bookList.map((item: receiveObjListProps) => {
@@ -126,7 +167,9 @@ function BookList({
       }
       return item;
     });
-    setBookList(newBookList);
+    if (setBookList) {
+      setBookList(newBookList);
+    }
   };
 
   return (
@@ -139,6 +182,7 @@ function BookList({
                 <ThumbnailImage
                   thumbnail={item.thumbnail}
                   isWish={item.isWish}
+                  isbn={item.isbn}
                 />
                 <BookTitle title={item.title} author={item.authors[0]} />
               </div>

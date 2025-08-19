@@ -1,2 +1,18 @@
 .pagination {
+  margin: 64px 0;
+  display: flex;
+  justify-content: center;
+
+  button {
+    color: var(--secondary-color);
+    margin: 0 12px;
+    font-size: 16px;
+
+    span {
+      margin: 0 4px;
+      svg {
+        font-size: 10px;
+      }
+    }
+  }
 }
