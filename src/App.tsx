@@ -1,7 +1,7 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 
 // pages
-import Main from "./pages/Main";
+import SearchBook from "./pages/SearchBook";
 import WishList from "./pages/WishList";
 
 //layout
@@ -12,7 +12,7 @@ const routes = [
     path: "/",
     element: (
       <DefaultLayout>
-        <Main />
+        <SearchBook />
       </DefaultLayout>
     ),
   },

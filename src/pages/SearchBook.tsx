@@ -1,5 +1,5 @@
 import { useGetBooksData } from "../hooks/useGetBooksData";
-import SearchBox from "../components/main/SearchBox";
+import SearchBox from "../components/searchBook/SearchBox";
 import { useEffect } from "react";
 import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
@@ -8,7 +8,7 @@ import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
 import useSendObjStore from "../store/useSendObjStore";
 
-function Main() {
+function SearchBook() {
   const bookList = useBookListStore((state) => state.bookList);
   const metaData = useBookListStore((state) => state.metaData);
   const setBookList = useBookListStore((state) => state.setBookList);
@@ -42,4 +42,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default SearchBook;

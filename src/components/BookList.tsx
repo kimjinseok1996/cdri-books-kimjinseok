@@ -1,4 +1,4 @@
-import "../style/main/bookList.scss";
+import "../style/searchBook/bookList.scss";
 import type { receiveObjListProps } from "../types/books.type";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { PiHeartFill, PiHeartBold } from "react-icons/pi";
