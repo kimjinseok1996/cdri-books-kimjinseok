@@ -73,6 +73,18 @@ button{
   &:hover{
     opacity: 0.9;
   }
+
+  &.primary-btn{
+    background-color: var(--primary-color);
+    color: #fff;
+    height: 42px;
+  }
+
+  &.secondary-btn{
+    background-color: var(--light-gray-color);
+    color: var(--secondary-color);
+    height: 42px;
+  }
 }
 
 .main-title{

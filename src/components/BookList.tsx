@@ -19,7 +19,7 @@ const MoreButton = ({
   const isUp = type === "up";
   return (
     <button
-      className="more-btn"
+      className="more-btn secondary-btn"
       onClick={() => openHandler(isbn, isUp ? false : true)}
     >
       상세보기
@@ -30,7 +30,7 @@ const MoreButton = ({
 
 const BuyButton = ({ url }: { url: string }) => {
   return (
-    <button className="buy-btn" onClick={() => window.open(url)}>
+    <button className="buy-btn primary-btn" onClick={() => window.open(url)}>
       구매하기
     </button>
   );

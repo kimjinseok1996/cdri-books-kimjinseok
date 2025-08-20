@@ -39,8 +39,8 @@
       left: 0;
       width: 100%;
       background-color: var(--light-gray-color);
-      border-radius: 0 0 42px 42px;
-      padding: 28px 0 12px 0;
+      border-radius: 0 0 20px 20px;
+      padding: 28px 0 8px 0;
 
       & > div {
         display: flex;
@@ -74,16 +74,63 @@
     font-size: 14px;
     font-weight: 500;
   }
+}
 
-  .more-search-modal {
+.more-search-modal {
+  .modal-cover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 98;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+  }
+  .modal-content {
     position: absolute;
-    top: 100%;
-    right: 100px;
-    width: 300px;
+    top: 68px;
+    right: 12px;
     background-color: white;
-    border: 1px solid var(--secondary-color);
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 100;
+    border-radius: 12px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    padding: 28px;
+
+    .modal-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+
+      svg {
+        font-size: 24px;
+        color: var(--secondary-color);
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      align-items: center;
+      margin-top: 24px;
+      margin-bottom: 16px;
+
+      select {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid var(--secondary-color);
+        font-weight: 600;
+        width: 120px;
+        margin-right: 16px;
+        padding: 8px 6px;
+      }
+
+      input {
+        border-bottom: 1px solid var(--primary-color);
+        padding: 8px 6px;
+      }
+    }
+
+    .modal-search-btn {
+      width: 100%;
+    }
   }
 }

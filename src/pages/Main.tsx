@@ -1,50 +1,41 @@
 import { useGetBooksData } from "../hooks/useGetBooksData";
 import SearchBox from "../components/main/SearchBox";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
 import useBookListStore from "../store/useBookListStore";
 import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
+import useSendObjStore from "../store/useSendObjStore";
 
 function Main() {
-  const [searchText, setSearchText] = useState("");
   const bookList = useBookListStore((state) => state.bookList);
   const metaData = useBookListStore((state) => state.metaData);
   const setBookList = useBookListStore((state) => state.setBookList);
-  const [page, setPage] = useState(1);
-
-  const sendObj = {
-    query: searchText,
-    sort: "",
-    page,
-    size: 10,
-    target: "",
-  };
+  const sendObj = useSendObjStore((state) => state.sendObj);
+  const setPage = useSendObjStore((state) => state.setPage);
 
   const { mutate } = useGetBooksData();
 
-  const refetch = () => mutate(sendObj);
-
   useEffect(() => {
-    refetch();
-  }, [page]);
+    mutate(sendObj);
+  }, [sendObj.page]);
 
   return (
     <>
       <h2 className="main-title">도서 검색</h2>
-      <SearchBox
-        searchText={searchText}
-        setSearchText={setSearchText}
-        refetch={refetch}
-      />
+      <SearchBox />
       <CountBox len={metaData?.total_count} description="도서 검색 결과" />
       {!bookList?.length ? (
         <NoBooks />
       ) : (
         <>
           <BookList bookList={bookList} setBookList={setBookList} />
-          <Pagination page={page} setPage={setPage} isEnd={metaData?.is_end} />
+          <Pagination
+            page={sendObj.page}
+            setPage={setPage}
+            isEnd={metaData?.is_end}
+          />
         </>
       )}
     </>
