@@ -1,6 +1,6 @@
 import { useGetBooksData } from "../hooks/useGetBooksData";
 import SearchBox from "../components/main/SearchBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
 import useBookListStore from "../store/useBookListStore";
@@ -24,9 +24,11 @@ function Main() {
 
   const { mutate } = useGetBooksData();
 
-  const refetch = () => {
-    mutate(sendObj);
-  };
+  const refetch = () => mutate(sendObj);
+
+  useEffect(() => {
+    refetch();
+  }, [page]);
 
   return (
     <>
