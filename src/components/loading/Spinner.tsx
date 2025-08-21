@@ -6,7 +6,12 @@ function Spinner() {
 
   if (!isMutating) return null;
 
-  return <div className="spinner-loader"></div>;
+  return (
+    <>
+      <div className="spinner-loader"></div>
+      <div className="spinner-loader-cover"></div>
+    </>
+  );
 }
 
 export default Spinner;

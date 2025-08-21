@@ -5,9 +5,18 @@
   border: 6px solid var(--primary-color);
   animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 9999;
+  top: 48%;
+  left: 48%;
+}
+
+.spinner-loader-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
 }
 @keyframes l20-1 {
   0% {
