@@ -6,6 +6,7 @@ import { moneyComma } from "../share/share";
 import { ImageWithSuspense } from "./ImageWithSuspense";
 import useWishListStore from "../store/useWishListStore";
 import useBookListStore from "../store/useBookListStore";
+import NoBooks from "./NoBooks";
 
 const MoreButton = ({
   type = "up",
@@ -162,6 +163,8 @@ function BookList({
   bookList: receiveObjListProps[];
   setBookList?: (bookList: receiveObjListProps[]) => void;
 }) {
+  if (bookList.length === 0) return <NoBooks />;
+
   const openHandler = (isbn: string, bool: boolean) => {
     const newBookList = bookList.map((item: receiveObjListProps) => {
       if (item.isbn === isbn) {

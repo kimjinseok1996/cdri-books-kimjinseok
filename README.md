@@ -20,58 +20,61 @@ npm run local-start
 
 ## 폴더 구조 및 주요 코드 설명
 
+```
 📦src
-┣ 📂api ### api 관련 폴더
-┃ ┣ 📂path
-┃ ┃ ┗ 📜searchBook.path.ts
-┃ ┣ 📜axios.ts ### axios 기본 세팅
-┃ ┗ 📜books.api.ts
-┣ 📂assets
-┃ ┗ 📜icon_book.svg
-┣ 📂components
-┃ ┣ 📂layout
-┃ ┃ ┣ 📜DefaultLayout.tsx
-┃ ┃ ┗ 📜TransitionPageMoveLayout.tsx
-┃ ┣ 📂searchBook
-┃ ┃ ┣ 📜SearchBox.tsx
-┃ ┃ ┗ 📜SearchModal.tsx
-┃ ┣ 📂wishList
-┃ ┣ 📜BookList.tsx
-┃ ┣ 📜CountBox.tsx
-┃ ┣ 📜FramerMotion.tsx
-┃ ┣ 📜Header.tsx
-┃ ┣ 📜ImageWithSuspense.tsx
-┃ ┣ 📜NoBooks.tsx
-┃ ┣ 📜Pagination.tsx
-┃ ┗ 📜SkeletonComponent.tsx
-┣ 📂hooks
-┃ ┣ 📜useGetBooksData.ts ### 책데이터 패칭 훅
-┃ ┗ 📜useImageLoader.tsx ### 이미지 로드 여부 훅
-┣ 📂pages
-┃ ┣ 📜SearchBook.tsx
-┃ ┗ 📜WishList.tsx
-┣ 📂share ### 공통 common 폴더
-┃ ┗ 📜share.ts
-┣ 📂store
-┃ ┣ 📜useBookListStore.ts
-┃ ┣ 📜useSearchListStore.ts
-┃ ┣ 📜useSendObjStore.ts
-┃ ┗ 📜useWishListStore.ts
-┣ 📂style
-┃ ┣ 📂searchBook
-┃ ┃ ┣ 📜bookList.scss
-┃ ┃ ┣ 📜searchBox.scss
-┃ ┃ ┗ 📜searchModal.scss
-┃ ┣ 📜global.scss
-┃ ┣ 📜header.scss
-┃ ┣ 📜pagination.scss
-┃ ┗ 📜_variables.scss
-┣ 📂types
-┃ ┗ 📜books.type.ts
-┣ 📜App.tsx
-┣ 📜main.tsx
-┣ 📜properties.ts
-┗ 📜vite-env.d.ts
+ ┣ 📂api ### api 관련 폴더
+ ┃ ┣ 📂path
+ ┃ ┃ ┗ 📜searchBook.path.ts
+ ┃ ┣ 📜axios.ts
+ ┃ ┗ 📜books.api.ts
+ ┣ 📂assets
+ ┃ ┗ 📜icon_book.svg
+ ┣ 📂components
+ ┃ ┣ 📂layout
+ ┃ ┃ ┣ 📜DefaultLayout.tsx
+ ┃ ┃ ┗ 📜TransitionPageMoveLayout.tsx
+ ┃ ┣ 📂searchBook
+ ┃ ┃ ┣ 📜SearchBox.tsx
+ ┃ ┃ ┗ 📜SearchModal.tsx
+ ┃ ┣ 📜BookList.tsx
+ ┃ ┣ 📜CountBox.tsx
+ ┃ ┣ 📜FramerMotion.tsx
+ ┃ ┣ 📜Header.tsx
+ ┃ ┣ 📜ImageWithSuspense.tsx
+ ┃ ┣ 📜NoBooks.tsx
+ ┃ ┣ 📜Pagination.tsx
+ ┃ ┗ 📜SkeletonComponent.tsx
+ ┣ 📂hooks
+ ┃ ┣ 📜useGetBooksData.ts
+ ┃ ┗ 📜useImageLoader.tsx
+ ┣ 📂pages
+ ┃ ┣ 📜SearchBook.tsx
+ ┃ ┗ 📜WishList.tsx
+ ┣ 📂share ### 공통 common폴더
+ ┃ ┗ 📜share.ts
+ ┣ 📂store ### 상태관리
+ ┃ ┣ 📜useBookListStore.ts
+ ┃ ┣ 📜useSearchListStore.ts
+ ┃ ┣ 📜useSendObjStore.ts
+ ┃ ┗ 📜useWishListStore.ts
+ ┣ 📂style
+ ┃ ┣ 📂searchBook
+ ┃ ┃ ┣ 📜bookList.scss
+ ┃ ┃ ┣ 📜searchBox.scss
+ ┃ ┃ ┗ 📜searchModal.scss
+ ┃ ┣ 📜global.scss
+ ┃ ┣ 📜header.scss
+ ┃ ┣ 📜pagination.scss
+ ┃ ┗ 📜_variables.scss
+ ┣ 📂suspense ### 서스팬스
+ ┃ ┗ 📜PageSkeleton.tsx
+ ┣ 📂types
+ ┃ ┗ 📜books.type.ts
+ ┣ 📜App.tsx
+ ┣ 📜main.tsx
+ ┣ 📜properties.ts
+ ┗ 📜vite-env.d.ts
+```
 
 ## 라이브러리 선택 이유
 

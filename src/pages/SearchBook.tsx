@@ -2,7 +2,6 @@ import { lazy, Suspense } from "react";
 import { useGetBooksData } from "../hooks/useGetBooksData";
 import SearchBox from "../components/searchBook/SearchBox";
 import { useEffect } from "react";
-import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
 import useBookListStore from "../store/useBookListStore";
 import Pagination from "../components/Pagination";
@@ -18,7 +17,7 @@ function SearchBook() {
   const sendObj = useSendObjStore((state) => state.sendObj);
   const setPage = useSendObjStore((state) => state.setPage);
 
-  const { mutate } = useGetBooksData();
+  const { mutate, error } = useGetBooksData();
 
   useEffect(() => {
     mutate(sendObj);
@@ -27,20 +26,25 @@ function SearchBook() {
   return (
     <>
       <h2 className="main-title">도서 검색</h2>
-      <SearchBox />
+      <SearchBox mutate={mutate} />
       <CountBox len={metaData?.total_count} description="도서 검색 결과" />
-      {!bookList?.length ? (
-        <NoBooks />
+      {error ? (
+        <div className="alert-text">
+          {(error as any).response?.data?.message || error?.message}
+        </div>
       ) : (
         <>
           <Suspense fallback={<SkeletonComponent count={10} />}>
             <BookList bookList={bookList} setBookList={setBookList} />
           </Suspense>
-          <Pagination
-            page={sendObj.page}
-            setPage={setPage}
-            isEnd={metaData?.is_end}
-          />
+
+          {!!bookList.length && (
+            <Pagination
+              page={sendObj.page}
+              setPage={setPage}
+              isEnd={metaData?.is_end}
+            />
+          )}
         </>
       )}
     </>

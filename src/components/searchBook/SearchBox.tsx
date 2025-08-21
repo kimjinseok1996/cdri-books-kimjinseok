@@ -3,7 +3,6 @@ import { RiSearchLine, RiCloseFill } from "react-icons/ri";
 import { memo } from "react";
 import useSearchListStore from "../../store/useSearchListStore";
 import { useState, useEffect, useRef } from "react";
-import { useGetBooksData } from "../../hooks/useGetBooksData";
 import useSendObjStore from "../../store/useSendObjStore";
 import { SearchModal } from "./SearchModal";
 
@@ -15,8 +14,11 @@ const sendBasicObj = {
   target: "",
 };
 
-function SearchBox() {
-  const { mutate } = useGetBooksData();
+interface SearchBoxProps {
+  mutate: (obj: typeof sendBasicObj) => void;
+}
+
+function SearchBox({ mutate }: SearchBoxProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [searchText, setSearchText] = useState("");
   const [isSearchListOpen, setIsSearchListOpen] = useState(false);
@@ -115,6 +117,7 @@ function SearchBox() {
         <SearchModal
           setIsSearchModalOpen={setIsSearchModalOpen}
           setSearchText={setSearchText}
+          mutate={mutate}
         />
       )}
     </div>

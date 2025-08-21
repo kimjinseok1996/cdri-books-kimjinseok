@@ -1,7 +1,6 @@
 import "../../style/searchBook/searchModal.scss";
 import { RiCloseFill } from "react-icons/ri";
 import { useState, useEffect, useRef } from "react";
-import { useGetBooksData } from "../../hooks/useGetBooksData";
 import useSendObjStore from "../../store/useSendObjStore";
 
 const sendBasicObj = {
@@ -15,11 +14,12 @@ const sendBasicObj = {
 export const SearchModal = ({
   setIsSearchModalOpen,
   setSearchText,
+  mutate,
 }: {
   setIsSearchModalOpen: (value: boolean) => void;
   setSearchText: (value: string) => void;
+  mutate: (obj: typeof sendBasicObj) => void;
 }) => {
-  const { mutate } = useGetBooksData();
   const input = useRef<HTMLInputElement>(null);
   const [modalSearchText, setModalSearchText] = useState("");
   const [target, setTarget] = useState("title");

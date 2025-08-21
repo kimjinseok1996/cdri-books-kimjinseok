@@ -1,6 +1,6 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import PageSkeletonComponent from "./components/PageSkeletonComponent";
+import PageSkeleton from "./suspense/PageSkeleton";
 
 // pages
 const SearchBook = lazy(() => import("./pages/SearchBook"));
@@ -14,7 +14,7 @@ const routes = [
     path: "/",
     element: (
       <DefaultLayout>
-        <Suspense fallback={<PageSkeletonComponent />}>
+        <Suspense fallback={<PageSkeleton />}>
           <SearchBook />
         </Suspense>
       </DefaultLayout>
@@ -24,7 +24,7 @@ const routes = [
     path: "/wishlist",
     element: (
       <DefaultLayout>
-        <Suspense fallback={<PageSkeletonComponent />}>
+        <Suspense fallback={<PageSkeleton />}>
           <WishList />
         </Suspense>
       </DefaultLayout>
