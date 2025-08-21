@@ -27,7 +27,6 @@ const useSearchListStore = create(
     }),
     {
       name: "searchList",
-      //storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

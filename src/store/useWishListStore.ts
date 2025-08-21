@@ -23,7 +23,6 @@ const useWishListStore = create(
     }),
     {
       name: "wishList",
-      //storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

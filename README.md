@@ -22,64 +22,63 @@ npm run local-start
 
 ```
 📦src
- ┣ 📂api
- ┃ ┣ 📂path
- ┃ ┃ ┗ 📜searchBook.path.ts
- ┃ ┣ 📜axios.ts
- ┃ ┗ 📜books.api.ts
- ┣ 📂assets
- ┃ ┗ 📜icon_book.svg
- ┣ 📂components
- ┃ ┣ 📂layout
- ┃ ┃ ┣ 📜DefaultLayout.tsx
- ┃ ┃ ┗ 📜TransitionPageMoveLayout.tsx
- ┃ ┣ 📂loading
- ┃ ┃ ┗ 📜Spinner.tsx
- ┃ ┣ 📂searchBook
- ┃ ┃ ┣ 📜SearchBox.tsx
- ┃ ┃ ┗ 📜SearchModal.tsx
- ┃ ┣ 📜BookList.tsx
- ┃ ┣ 📜CountBox.tsx
- ┃ ┣ 📜ErrorSection.tsx
- ┃ ┣ 📜FramerMotion.tsx
- ┃ ┣ 📜Header.tsx
- ┃ ┣ 📜ImageWithSuspense.tsx
- ┃ ┣ 📜NoBooks.tsx
- ┃ ┣ 📜Pagination.tsx
- ┃ ┗ 📜SkeletonComponent.tsx
- ┣ 📂hooks
- ┃ ┣ 📜useGetBooksData.ts
- ┃ ┗ 📜useImageLoader.tsx
- ┣ 📂pages
- ┃ ┣ 📜SearchBook.tsx
- ┃ ┗ 📜WishList.tsx
- ┣ 📂share
- ┃ ┗ 📜share.ts
- ┣ 📂store
- ┃ ┣ 📜useBookListStore.ts
- ┃ ┣ 📜useSearchListStore.ts
- ┃ ┣ 📜useSendObjStore.ts
- ┃ ┗ 📜useWishListStore.ts
- ┣ 📂style
- ┃ ┣ 📂loading
- ┃ ┃ ┗ 📜spinner.scss
- ┃ ┣ 📂searchBook
- ┃ ┃ ┣ 📜bookList.scss
- ┃ ┃ ┣ 📜searchBox.scss
- ┃ ┃ ┗ 📜searchModal.scss
- ┃ ┣ 📜global.scss
- ┃ ┣ 📜header.scss
- ┃ ┣ 📜pagination.scss
- ┃ ┗ 📜_variables.scss
- ┣ 📂suspense
- ┃ ┗ 📜PageSkeleton.tsx
- ┣ 📂types
- ┃ ┗ 📜books.type.ts
- ┣ 📜App.tsx
- ┣ 📜main.tsx
- ┣ 📜properties.ts
- ┗ 📜vite-env.d.ts
+ ┣ 📂api # 서버 통신 로직
+ ┣ 📂assets # 이미지
+ ┣ 📂components # 재사용 가능한 컴포넌트
+ ┣ 📂hooks # 커스텀 훅
+ ┣ 📂pages # 화면 단위 컴포넌트
+ ┣ 📂store # Zustand 전역 상태 관리
+ ┣ 📂style # scss 스타일링
+ ┣ 📂suspense # 서스팬스 컴포넌트
+ ┣ 📂types # 재사용 가능한 타입
 ```
+
+```
+function SearchBook() {
+  const bookList = useBookListStore((state) => state.bookList);
+  const metaData = useBookListStore((state) => state.metaData);
+  const setBookList = useBookListStore((state) => state.setBookList);
+  const sendObj = useSendObjStore((state) => state.sendObj);
+  const setPage = useSendObjStore((state) => state.setPage);
+
+  const { mutate, error } = useGetBooksData();
+
+  useEffect(() => {
+    mutate(sendObj);
+  }, [sendObj.page]);
+
+  return (
+    <>
+      <h2 className="main-title">도서 검색</h2>
+      <SearchBox mutate={mutate} />
+      <CountBox len={metaData?.total_count} description="도서 검색 결과" />
+      {error ? (
+        <ErrorSection error={error} />
+      ) : (
+        <>
+          <Suspense fallback={<SkeletonComponent count={10} />}>
+            <BookList bookList={bookList} setBookList={setBookList} />
+          </Suspense>
+          {!!bookList.length && (
+            <Pagination
+              page={sendObj.page}
+              setPage={setPage}
+              isEnd={metaData?.is_end}
+            />
+          )}
+        </>
+      )}
+    </>
+  );
+}
+```
+
+- Zustand Selector 기반 최적화
+  - 필요한 상태만 구독함으로써 불필요한 리렌더링 최소화
+- Request Data 전역 관리 및 공유
+  - 전역으로 관리하여 여러 컴포넌트에서 일관성 있게 공유
+- 역할 기반 컴포넌트 추상화
+  - 역할 단위로 추상화된 컴포넌트로 분리해 재사용성과 유지보수성 향상
 
 ## 라이브러리 선택 이유
 
