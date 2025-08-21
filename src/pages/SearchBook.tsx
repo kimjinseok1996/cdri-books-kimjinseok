@@ -7,6 +7,7 @@ import useBookListStore from "../store/useBookListStore";
 import Pagination from "../components/Pagination";
 import useSendObjStore from "../store/useSendObjStore";
 import SkeletonComponent from "../components/SkeletonComponent";
+import ErrorSection from "../components/ErrorSection";
 
 const BookList = lazy(() => import("../components/BookList"));
 
@@ -29,15 +30,12 @@ function SearchBook() {
       <SearchBox mutate={mutate} />
       <CountBox len={metaData?.total_count} description="도서 검색 결과" />
       {error ? (
-        <div className="alert-text">
-          {(error as any).response?.data?.message || error?.message}
-        </div>
+        <ErrorSection error={error} />
       ) : (
         <>
           <Suspense fallback={<SkeletonComponent count={10} />}>
             <BookList bookList={bookList} setBookList={setBookList} />
           </Suspense>
-
           {!!bookList.length && (
             <Pagination
               page={sendObj.page}

@@ -96,6 +96,7 @@ const WishButton = ({ isWish, isbn }: { isWish: boolean; isbn: string }) => {
         {
           ...found,
           isWish: true,
+          isOpen: false,
         },
       ]);
     }

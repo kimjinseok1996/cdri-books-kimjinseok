@@ -1,3 +1,4 @@
+@import "variables";
 header {
   display: flex;
   justify-content: space-between;
@@ -15,6 +16,10 @@ header {
 
       li {
         margin: 0 16px;
+
+        @media (max-width: $mobile-size) {
+          margin: 0 4px;
+        }
 
         a {
           text-decoration: none;

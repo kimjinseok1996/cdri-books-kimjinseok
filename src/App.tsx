@@ -1,6 +1,7 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import PageSkeleton from "./suspense/PageSkeleton";
+import Spinner from "./components/loading/Spinner";
 
 // pages
 const SearchBook = lazy(() => import("./pages/SearchBook"));
@@ -36,9 +37,12 @@ const Router = () => useRoutes(routes);
 
 function App() {
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <>
+      <Spinner />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </>
   );
 }
 

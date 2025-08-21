@@ -22,7 +22,7 @@ npm run local-start
 
 ```
 📦src
- ┣ 📂api ### api 관련 폴더
+ ┣ 📂api
  ┃ ┣ 📂path
  ┃ ┃ ┗ 📜searchBook.path.ts
  ┃ ┣ 📜axios.ts
@@ -33,11 +33,14 @@ npm run local-start
  ┃ ┣ 📂layout
  ┃ ┃ ┣ 📜DefaultLayout.tsx
  ┃ ┃ ┗ 📜TransitionPageMoveLayout.tsx
+ ┃ ┣ 📂loading
+ ┃ ┃ ┗ 📜Spinner.tsx
  ┃ ┣ 📂searchBook
  ┃ ┃ ┣ 📜SearchBox.tsx
  ┃ ┃ ┗ 📜SearchModal.tsx
  ┃ ┣ 📜BookList.tsx
  ┃ ┣ 📜CountBox.tsx
+ ┃ ┣ 📜ErrorSection.tsx
  ┃ ┣ 📜FramerMotion.tsx
  ┃ ┣ 📜Header.tsx
  ┃ ┣ 📜ImageWithSuspense.tsx
@@ -50,14 +53,16 @@ npm run local-start
  ┣ 📂pages
  ┃ ┣ 📜SearchBook.tsx
  ┃ ┗ 📜WishList.tsx
- ┣ 📂share ### 공통 common폴더
+ ┣ 📂share
  ┃ ┗ 📜share.ts
- ┣ 📂store ### 상태관리
+ ┣ 📂store
  ┃ ┣ 📜useBookListStore.ts
  ┃ ┣ 📜useSearchListStore.ts
  ┃ ┣ 📜useSendObjStore.ts
  ┃ ┗ 📜useWishListStore.ts
  ┣ 📂style
+ ┃ ┣ 📂loading
+ ┃ ┃ ┗ 📜spinner.scss
  ┃ ┣ 📂searchBook
  ┃ ┃ ┣ 📜bookList.scss
  ┃ ┃ ┣ 📜searchBox.scss
@@ -66,7 +71,7 @@ npm run local-start
  ┃ ┣ 📜header.scss
  ┃ ┣ 📜pagination.scss
  ┃ ┗ 📜_variables.scss
- ┣ 📂suspense ### 서스팬스
+ ┣ 📂suspense
  ┃ ┗ 📜PageSkeleton.tsx
  ┣ 📂types
  ┃ ┗ 📜books.type.ts
