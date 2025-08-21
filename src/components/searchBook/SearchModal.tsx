@@ -14,8 +14,10 @@ const sendBasicObj = {
 
 export const SearchModal = ({
   setIsSearchModalOpen,
+  setSearchText,
 }: {
   setIsSearchModalOpen: (value: boolean) => void;
+  setSearchText: (value: string) => void;
 }) => {
   const { mutate } = useGetBooksData();
   const input = useRef<HTMLInputElement>(null);
@@ -28,6 +30,12 @@ export const SearchModal = ({
   };
 
   const modalSearchHandler = () => {
+    if (!modalSearchText) {
+      alert("검색어를 입력하세요.");
+      return;
+    }
+
+    setSearchText("");
     modalClose();
 
     const newObj = {

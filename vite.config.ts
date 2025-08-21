@@ -6,15 +6,15 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [
     // visualizer({
-    //   open: true, // 빌드 완료 후 브라우저에서 결과 자동 오픈
-    //   filename: "stats.html", // 결과 파일 이름 (기본: stats.html)
-    //   template: "treemap", // 시각화 형식: sunburst, treemap, network 중 선택 가능
+    //   open: true,
+    //   filename: "stats.html",
+    //   template: "treemap",
     // }),
     react(),
     viteCompression({
       algorithm: "gzip",
       ext: ".gz",
-      threshold: 10240, // 10KB 이상 파일만 압축
+      threshold: 10240,
     }),
   ],
   base: "",

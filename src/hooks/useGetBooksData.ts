@@ -1,8 +1,8 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { getBooksData } from "../api/books.api";
 import useBookListStore from "../store/useBookListStore";
 import useWishListStore from "../store/useWishListStore";
-import type { sendObjProps, receiveObjProps } from "../types/books.type";
+import type { sendObjProps } from "../types/books.type";
 
 // export const useGetBooksData = (query: sendObjProps) => {
 //   return useQuery({

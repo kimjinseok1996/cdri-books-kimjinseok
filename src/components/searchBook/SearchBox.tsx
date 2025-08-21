@@ -29,11 +29,14 @@ function SearchBox() {
   const setSendObj = useSendObjStore((state) => state.setSendObj);
 
   const searchHandler = () => {
+    if (!searchText) {
+      alert("검색어를 입력하세요.");
+      return;
+    }
+
     if (searchText && !searchList.includes(searchText)) {
       addSearchList([searchText]);
     }
-
-    setIsSearchListOpen(false);
 
     const newObj = {
       ...sendBasicObj,
@@ -109,7 +112,10 @@ function SearchBox() {
         상세검색
       </button>
       {isSearchModalOpen && (
-        <SearchModal setIsSearchModalOpen={setIsSearchModalOpen} />
+        <SearchModal
+          setIsSearchModalOpen={setIsSearchModalOpen}
+          setSearchText={setSearchText}
+        />
       )}
     </div>
   );
