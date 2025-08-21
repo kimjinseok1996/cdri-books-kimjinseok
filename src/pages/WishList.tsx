@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import useWishListStore from "../store/useWishListStore";
 import CountBox from "../components/CountBox";
-import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
 import NoBooks from "../components/NoBooks";
+import SkeletonComponent from "../components/SkeletonComponent";
+
+const BookList = lazy(() => import("../components/BookList"));
 
 function WishList() {
   const wishList = useWishListStore((state) => state.wishList);
@@ -21,7 +23,9 @@ function WishList() {
         <NoBooks description="찜한 책이 없습니다." />
       ) : (
         <>
-          <BookList bookList={slicedWishList} setBookList={setWishList} />
+          <Suspense fallback={<SkeletonComponent count={10} />}>
+            <BookList bookList={slicedWishList} setBookList={setWishList} />
+          </Suspense>
           <Pagination page={page} setPage={setPage} isEnd={isEnd} />
         </>
       )}

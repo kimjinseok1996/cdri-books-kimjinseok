@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+## 프로젝트 개요
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 책 검색, 책 찜하기 프론트엔드 서비스
 
-Currently, two official plugins are available:
+## 실행 방법 및 환경 설정
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Node.js 20 이상 권장
 
-## Expanding the ESLint configuration
+의존성 설치
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+npm i
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+로컬서버 실행
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+npm run local-start
+```
+
+## 폴더 구조 및 주요 코드 설명
+
+📦src
+┣ 📂api ### api 관련 폴더
+┃ ┣ 📂path
+┃ ┃ ┗ 📜searchBook.path.ts
+┃ ┣ 📜axios.ts ### axios 기본 세팅
+┃ ┗ 📜books.api.ts
+┣ 📂assets
+┃ ┗ 📜icon_book.svg
+┣ 📂components
+┃ ┣ 📂layout
+┃ ┃ ┣ 📜DefaultLayout.tsx
+┃ ┃ ┗ 📜TransitionPageMoveLayout.tsx
+┃ ┣ 📂searchBook
+┃ ┃ ┣ 📜SearchBox.tsx
+┃ ┃ ┗ 📜SearchModal.tsx
+┃ ┣ 📂wishList
+┃ ┣ 📜BookList.tsx
+┃ ┣ 📜CountBox.tsx
+┃ ┣ 📜FramerMotion.tsx
+┃ ┣ 📜Header.tsx
+┃ ┣ 📜ImageWithSuspense.tsx
+┃ ┣ 📜NoBooks.tsx
+┃ ┣ 📜Pagination.tsx
+┃ ┗ 📜SkeletonComponent.tsx
+┣ 📂hooks
+┃ ┣ 📜useGetBooksData.ts ### 책데이터 패칭 훅
+┃ ┗ 📜useImageLoader.tsx ### 이미지 로드 여부 훅
+┣ 📂pages
+┃ ┣ 📜SearchBook.tsx
+┃ ┗ 📜WishList.tsx
+┣ 📂share ### 공통 common 폴더
+┃ ┗ 📜share.ts
+┣ 📂store
+┃ ┣ 📜useBookListStore.ts
+┃ ┣ 📜useSearchListStore.ts
+┃ ┣ 📜useSendObjStore.ts
+┃ ┗ 📜useWishListStore.ts
+┣ 📂style
+┃ ┣ 📂searchBook
+┃ ┃ ┣ 📜bookList.scss
+┃ ┃ ┣ 📜searchBox.scss
+┃ ┃ ┗ 📜searchModal.scss
+┃ ┣ 📜global.scss
+┃ ┣ 📜header.scss
+┃ ┣ 📜pagination.scss
+┃ ┗ 📜_variables.scss
+┣ 📂types
+┃ ┗ 📜books.type.ts
+┣ 📜App.tsx
+┣ 📜main.tsx
+┣ 📜properties.ts
+┗ 📜vite-env.d.ts
+
+## 라이브러리 선택 이유
+
+- tanstack/react-query,
+  - 데이터 패칭을 간편하게 처리할 수 있고, 에러, 로딩 상태 관리 등 다양한 기능을 제공한다.
+- framer-motion
+  - js로 애니메이션을 구현할 수 있으며, 애니메이션을 컴포넌트 단위로 관리할 수 있다.
+- react-icons
+  - 다양한 웹 아이콘을 간단하게 임포트해서 사용할 수 있다.
+- react-loading-skeleton
+  - 별도의 스타일링 작업 없이도 쉽게 적용할 수 있다.
+- sass
+  - 함수형 스타일링과 변수, mixin 등을 활용해 재사용성과 커스터마이징이 용이하다.
+- zustand
+  - 다른 상태 관리 라이브러리에 비해 사용법이 간단하고, 유지보수에 용이하다.
+
+## 강조 하고 싶은 기능
+
+- Framer Motion과 Skeleton UI를 활용한 부드러운 사용자 경험 제공

@@ -1,12 +1,15 @@
+import { lazy, Suspense } from "react";
 import { useGetBooksData } from "../hooks/useGetBooksData";
 import SearchBox from "../components/searchBook/SearchBox";
 import { useEffect } from "react";
 import NoBooks from "../components/NoBooks";
 import CountBox from "../components/CountBox";
 import useBookListStore from "../store/useBookListStore";
-import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
 import useSendObjStore from "../store/useSendObjStore";
+import SkeletonComponent from "../components/SkeletonComponent";
+
+const BookList = lazy(() => import("../components/BookList"));
 
 function SearchBook() {
   const bookList = useBookListStore((state) => state.bookList);
@@ -30,7 +33,9 @@ function SearchBook() {
         <NoBooks />
       ) : (
         <>
-          <BookList bookList={bookList} setBookList={setBookList} />
+          <Suspense fallback={<SkeletonComponent count={10} />}>
+            <BookList bookList={bookList} setBookList={setBookList} />
+          </Suspense>
           <Pagination
             page={sendObj.page}
             setPage={setPage}
